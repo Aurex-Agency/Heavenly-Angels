@@ -1,6 +1,10 @@
 # Logo and photo sources
 
-Retrieved October 27, 2026. None of these photos show Heavenly Angels' actual residents, staff, or home. Replace them with permission-cleared photos of the real home and team when available.
+Retrieved October 27, 2026.
+
+**Photo rule:** Heavenly Angels cares for older adults. Photos should show seniors with caregivers, never people with Down syndrome or other intellectual disabilities.
+
+None of these photos show Heavenly Angels' actual residents, staff, or home. Replace them with permission-cleared photos of the real home and team when available.
 
 ## From the current website (heavenlyangelsms.com)
 
@@ -17,14 +21,14 @@ Retrieved October 27, 2026. None of these photos show Heavenly Angels' actual re
 | File | Unsplash photo | Used in |
 |---|---|---|
 | `caregiver-joy-*` | https://unsplash.com/photos/GPrh_GLiWCI | Hero |
-| `wheelchair-support-*` | https://unsplash.com/photos/alCU30xHRnA | Supervised living panel |
+| `nurse-resident-*` | https://unsplash.com/photos/dMhB7w99ju8 | Supervised living panel |
 | `dancing-*` | https://unsplash.com/photos/ax8tB0iOk_g | Adult day services panel |
-| `cooking-together-*` | https://unsplash.com/photos/8cxuRk9N0Ns | Day cycle, 7:00 AM |
-| `swing-joy-*` | https://unsplash.com/photos/n5iRli7HLL4 | Day cycle, 10:00 AM |
+| `coffee-morning-*` | https://unsplash.com/photos/DcawA4jhfuE | Day cycle, 7:00 AM |
+| `exercise-class-*` | https://unsplash.com/photos/XDH1y3RTYyI | Day cycle, 10:00 AM |
 | `blood-pressure-check-*` | https://unsplash.com/photos/PSHCnGmOeUo | Day cycle, 1:30 PM |
 | `caregiver-laughing-*` | https://unsplash.com/photos/2obyM4zYt3Y | Day cycle, 5:30 PM |
 | `porch-*` | https://unsplash.com/photos/85dFx2jf4sI | Day cycle, 10:00 PM (tinted to dusk) |
-| `families-hug-*` | https://unsplash.com/photos/GM5Yn5XRVqA | Gallery |
+| `seniors-laughing-*` | https://unsplash.com/photos/GJaWV0YoBeU | Gallery |
 | `coloring-activity-*` | https://unsplash.com/photos/bSXk1lOp8T0 | Gallery |
 | `waving-hello-*` | https://unsplash.com/photos/w1eDyNeSMi0 | Gallery |
 | `caregiver-smiling-*` | https://unsplash.com/photos/Z0MkM1a4wfg | Gallery |

@@ -21,7 +21,7 @@ const faqSchema = {
 };
 
 const moments = [
-  { src: '/assets/photos/families-hug-640.webp', w: 640, h: 437, alt: 'A young man with Down syndrome hugged by his mother and father', caption: 'Family is always welcome', tilt: -3 },
+  { src: '/assets/photos/seniors-laughing-640.webp', w: 640, h: 427, alt: 'Three older adults laughing together over tea', caption: 'Good company', tilt: -3 },
   { src: '/assets/photos/nurse-smiling.webp', w: 500, h: 500, alt: 'A smiling caregiver leaning in beside an older man', caption: 'Familiar faces', tilt: 2 },
   { src: '/assets/photos/coloring-activity-640.webp', w: 640, h: 453, alt: 'A caregiver helping two older adults with a coloring activity', caption: 'Crafts at the table', tilt: -2 },
   { src: '/assets/photos/waving-hello-640.webp', w: 640, h: 427, alt: 'An older couple smiling and waving hello in a bright room', caption: 'Always a warm hello', tilt: 3 },
@@ -44,20 +44,20 @@ const chapters = [
       { icon: 'pills', label: 'Morning medications, as prescribed', done: true },
     ] },
     dove: 'welcome',
-    photo: { src: 'cooking-together', w: 1200, h: 799, alt: 'People gathered around a kitchen table preparing a meal together' },
+    photo: { src: 'coffee-morning', w: 1200, h: 675, alt: 'Three older adults sharing coffee and conversation around a table at home' },
   },
   {
     time: '10:00 AM',
     part: 'Late morning',
     title: 'Something to look forward to',
-    text: 'Every day has something in it. Activities are planned around what each person enjoys, from music and crafts to games and time outdoors.',
+    text: 'Every day has something in it. Activities are planned around what each person enjoys, from music, crafts, and gentle exercise to games and time outdoors.',
     card: { stamp: 'Today · 10:00 AM', items: [
       { icon: 'palette', label: 'Arts and crafts', done: true },
       { icon: 'heart', label: 'Music hour', done: false },
       { icon: 'sun', label: 'Walk outside, weather permitting', done: false },
     ] },
     dove: 'guide',
-    photo: { src: 'swing-joy', w: 1200, h: 800, alt: 'A man on a park swing throwing both arms up and laughing' },
+    photo: { src: 'exercise-class', w: 1200, h: 800, alt: 'Older women dancing and stretching together in a bright activity room' },
   },
   {
     time: '1:30 PM',
@@ -219,11 +219,11 @@ const chapters = [
           <p class="program-addr">1333 East Broad Street, West Point</p>
           <figure class="program-photo">
             <img
-              src="/assets/photos/wheelchair-support-640.webp"
-              srcset="/assets/photos/wheelchair-support-640.webp 640w, /assets/photos/wheelchair-support-1200.webp 1200w"
+              src="/assets/photos/nurse-resident-640.webp"
+              srcset="/assets/photos/nurse-resident-640.webp 640w, /assets/photos/nurse-resident-1200.webp 1200w"
               sizes="(max-width: 960px) 90vw, 520px"
-              width="640" height="960" loading="lazy"
-              alt="A caregiver standing beside a smiling man in a wheelchair"
+              width="640" height="453" loading="lazy"
+              alt="A smiling caregiver sitting with an older woman in her room"
             />
           </figure>
           <Prop name="house" class="program-prop" />
