@@ -6,6 +6,7 @@ export const business = {
   phone: '662-295-3257',
   phoneHref: 'tel:+16622953257',
   director: 'Angela Rice',
+  bbb: 'https://www.bbb.org/us/ms/west-point/profile/adult-family-homes/heavenly-angels-llc-0523-235845861',
   city: 'West Point',
   region: 'MS',
   locations: [
