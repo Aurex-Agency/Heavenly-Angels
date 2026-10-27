@@ -6,24 +6,36 @@ const header = document.querySelector<HTMLElement>('[data-header]');
 const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
 const siteNav = document.getElementById('site-nav');
 
-menuBtn?.addEventListener('click', () => {
-  const open = menuBtn.getAttribute('aria-expanded') !== 'true';
-  menuBtn.setAttribute('aria-expanded', String(open));
+const setMenu = (open: boolean) => {
+  menuBtn?.setAttribute('aria-expanded', String(open));
   siteNav?.classList.toggle('open', open);
-});
+  document.body.classList.toggle('menu-open', open);
+};
+menuBtn?.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
 siteNav?.addEventListener('click', (e) => {
-  if ((e.target as HTMLElement).closest('a')) {
-    menuBtn?.setAttribute('aria-expanded', 'false');
-    siteNav.classList.remove('open');
-  }
+  if ((e.target as HTMLElement).closest('a')) setMenu(false);
 });
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && siteNav?.classList.contains('open')) {
-    menuBtn?.setAttribute('aria-expanded', 'false');
-    siteNav.classList.remove('open');
+    setMenu(false);
     menuBtn?.focus();
   }
 });
+
+/* Phone action dock: hidden while the hero or closing CTAs are on screen */
+const dock = document.querySelector<HTMLElement>('[data-dock]');
+const ctaZones = [document.querySelector('[data-hero]'), document.getElementById('visit')].filter(Boolean) as Element[];
+if (dock && ctaZones.length) {
+  const visible = new Set<Element>();
+  const io = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) visible.add(entry.target);
+      else visible.delete(entry.target);
+    }
+    dock.classList.toggle('show', visible.size === 0);
+  }, { threshold: 0.05 });
+  ctaZones.forEach((z) => io.observe(z));
+}
 
 /* Reveals */
 const revealObserver = new IntersectionObserver(
@@ -124,6 +136,33 @@ if (day) {
     day.style.setProperty('--dove-r', `${clamp(dx * 0.4, -14, 14).toFixed(1)}deg`);
     if (Math.abs(dx) > 0.5) day.style.setProperty('--dove-flip', dx < 0 ? '-1' : '1');
   };
+
+  // Clock pill follows whichever chapter is mid-screen
+  const clock = day.querySelector<HTMLElement>('[data-clock]');
+  const clockTime = clock?.querySelector('[data-clock-time]');
+  const clockPart = clock?.querySelector('[data-clock-part]');
+  const chapterEls = [...day.querySelectorAll<HTMLElement>('[data-chapter]')];
+  if (clock && clockTime && clockPart) {
+    const active = new Set<HTMLElement>();
+    const clockObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const el = entry.target as HTMLElement;
+          if (entry.isIntersecting) {
+            active.add(el);
+            clockTime.textContent = el.dataset.time ?? '';
+            clockPart.textContent = el.dataset.part ?? '';
+            clock.classList.toggle('is-night', el.dataset.night === 'true');
+          } else {
+            active.delete(el);
+          }
+        }
+        day.classList.toggle('clock-on', active.size > 0);
+      },
+      { rootMargin: '-35% 0px -35% 0px' },
+    );
+    chapterEls.forEach((el) => clockObserver.observe(el));
+  }
 
   const onScroll = () => {
     if (!ticking) {

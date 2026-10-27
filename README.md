@@ -17,8 +17,9 @@ npm run build    # static output in dist/
 - `src/scripts/motion.ts`: header state, mobile menu, reveals, hero parallax, day-cycle sky.
 - `src/styles/global.css`: design tokens and base styles. `src/styles/home.css`: homepage.
 - `public/assets/dove/`: dove poses (welcome, flight, guide).
+- `public/assets/brand/` and `public/assets/photos/`: logo, BBB seal, and photos. Sources and license notes are in `docs/photo-sources.md`.
 - `docs/content-sources.md`: where each business fact came from and what the owner must confirm.
 
 ## Prototype status
 
-Homepage only. The page carries `noindex` until launch (see `src/layouts/Base.astro`). Interior pages (Supervised Living, Adult Day Services, Getting Started, About, Golden Triangle service area, Contact) come next, along with a visit-request form, additional dove poses, and permission-cleared photography.
+Homepage only. The page carries `noindex` until launch (see `src/layouts/Base.astro`). Interior pages (Supervised Living, Adult Day Services, Getting Started, About, Golden Triangle service area, Contact) come next, along with a visit-request form and additional dove poses. Current photos are stock; swap in permission-cleared photos of the real home and team when available.
