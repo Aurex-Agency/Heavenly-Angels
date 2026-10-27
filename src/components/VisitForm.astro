@@ -1,0 +1,322 @@
+---
+// Visit-request form. Sends through Web3Forms when PUBLIC_WEB3FORMS_KEY is set;
+// without a key it falls back to opening a pre-filled email so requests never get lost.
+import Prop from './Prop.astro';
+import Stars from './Stars.astro';
+import { business } from '../data/site';
+
+const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1Z"/></svg>';
+---
+<section class="visit" id="visit" aria-labelledby="visit-title">
+  <div class="visit-sky" aria-hidden="true"><Stars count={50} seed={99} /></div>
+  <Prop name="moon" class="visit-moon bob" />
+  <Prop name="cloud" class="visit-cloud visit-cloud-1" />
+  <Prop name="cloud" class="visit-cloud visit-cloud-2" />
+
+  <div class="wrap visit-grid">
+    <div class="visit-copy">
+      <p class="eyebrow">Plan a visit</p>
+      <h2 id="visit-title">Come see the home for yourself</h2>
+      <p class="lede">Tell us a little about who you’re looking for care for, and we’ll reach out to set up a visit.</p>
+      <ul class="visit-points">
+        <li>Ask anything about daily life, care, and costs</li>
+        <li>Bring family along to the visit</li>
+        <li>Case managers and social workers welcome</li>
+      </ul>
+      <a class="visit-call" href={business.phoneHref}>
+        <span class="visit-call-icon"><Fragment set:html={phoneIcon} /></span>
+        <span><small>Rather talk now?</small>{business.phone}</span>
+      </a>
+    </div>
+
+    <div class="visit-card">
+      <img class="visit-dove" src="/assets/dove/welcome.webp" width="1402" height="1122" alt="" loading="lazy" />
+
+      <form class="visit-form" data-visit-form data-key={formKey} data-email={business.email} novalidate>
+        <div class="field">
+          <label for="vf-name">Your name <span aria-hidden="true">*</span></label>
+          <input id="vf-name" name="name" type="text" autocomplete="name" required aria-describedby="vf-name-err" />
+          <p class="field-err" id="vf-name-err"></p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="vf-phone">Phone <span aria-hidden="true">*</span></label>
+            <input id="vf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="vf-phone-err" />
+            <p class="field-err" id="vf-phone-err"></p>
+          </div>
+          <div class="field">
+            <label for="vf-email">Email <span class="optional">optional</span></label>
+            <input id="vf-email" name="email" type="email" autocomplete="email" aria-describedby="vf-email-err" />
+            <p class="field-err" id="vf-email-err"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="vf-role">I’m reaching out as</label>
+          <select id="vf-role" name="reaching_out_as">
+            <option>A family member</option>
+            <option>A case manager or social worker</option>
+            <option>Someone looking for myself</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <fieldset class="field chips">
+          <legend>Interested in</legend>
+          <label><input type="radio" name="interested_in" value="Supervised living" checked /><span>Supervised living</span></label>
+          <label><input type="radio" name="interested_in" value="Adult day services" /><span>Adult day services</span></label>
+          <label><input type="radio" name="interested_in" value="Not sure yet" /><span>Not sure yet</span></label>
+        </fieldset>
+
+        <div class="field">
+          <label for="vf-message">Anything we should know? <span class="optional">optional</span></label>
+          <textarea id="vf-message" name="message" rows="3" placeholder="Best time to call, questions, who the care is for…"></textarea>
+          <p class="field-hint">Please don’t include medical details. We’ll talk through those by phone.</p>
+        </div>
+
+        <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <button class="btn btn-gold visit-submit" type="submit">
+          <span class="label">Request a visit</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+        <p class="visit-consent">By sending this, you agree Heavenly Angels may contact you about your request. See our <a href="/privacy/">privacy page</a>.</p>
+        <p class="visit-status" role="status" aria-live="polite" data-status></p>
+      </form>
+
+      <div class="visit-done" data-done hidden tabindex="-1">
+        <Prop name="heart" class="visit-done-icon" />
+        <h3>Thank you!</h3>
+        <p data-done-text>We got your request and will reach out soon.</p>
+        <p class="visit-done-small">Need us sooner? Call <a href={business.phoneHref}>{business.phone}</a>. Staff are on site around the clock.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-visit-form]');
+  if (form) {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const done = document.querySelector<HTMLElement>('[data-done]')!;
+    const doneText = done.querySelector<HTMLElement>('[data-done-text]')!;
+    const submit = form.querySelector<HTMLButtonElement>('.visit-submit')!;
+    const key = form.dataset.key ?? '';
+    const email = form.dataset.email ?? '';
+
+    const setError = (input: HTMLInputElement, message: string) => {
+      const err = document.getElementById(`${input.id}-err`);
+      if (err) err.textContent = message;
+      if (message) input.setAttribute('aria-invalid', 'true');
+      else input.removeAttribute('aria-invalid');
+      input.closest('.field')?.classList.toggle('has-error', Boolean(message));
+    };
+
+    const validate = () => {
+      const name = form.elements.namedItem('name') as HTMLInputElement;
+      const phone = form.elements.namedItem('phone') as HTMLInputElement;
+      const mail = form.elements.namedItem('email') as HTMLInputElement;
+      const digits = phone.value.replace(/\D/g, '');
+      const checks: [HTMLInputElement, string][] = [
+        [name, name.value.trim() ? '' : 'Please enter your name.'],
+        [phone, digits.length >= 10 ? '' : 'Please enter a phone number with area code.'],
+        [mail, !mail.value || mail.validity.valid ? '' : 'That email doesn’t look right.'],
+      ];
+      checks.forEach(([input, msg]) => setError(input, msg));
+      const firstBad = checks.find(([, msg]) => msg);
+      firstBad?.[0].focus();
+      return !firstBad;
+    };
+
+    form.addEventListener('input', (e) => {
+      const input = e.target as HTMLInputElement;
+      if (input.getAttribute('aria-invalid')) setError(input, '');
+    });
+
+    const showDone = (name: string, viaEmail = false) => {
+      const first = name ? `, ${name.split(' ')[0]}` : '';
+      doneText.textContent = viaEmail
+        ? `Your email app should open with your request filled in${first}. Just hit send and we’ll reach out soon.`
+        : `We got your request${first}. We’ll reach out soon to set up a visit.`;
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      if (!validate()) return;
+
+      const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+      if (data.botcheck) return;
+      delete data.botcheck;
+
+      // No form service configured yet: hand off to the visitor's email app instead of failing.
+      if (!key) {
+        const body = [
+          `Name: ${data.name}`, `Phone: ${data.phone}`, `Email: ${data.email || '-'}`,
+          `Reaching out as: ${data.reaching_out_as}`, `Interested in: ${data.interested_in}`,
+          '', data.message || '',
+        ].join('\n');
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent('Visit request from the website')}&body=${encodeURIComponent(body)}`;
+        showDone(data.name, true);
+        return;
+      }
+
+      submit.disabled = true;
+      form.classList.add('is-sending');
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: key,
+            subject: `Visit request: ${data.name} (${data.interested_in})`,
+            from_name: 'Heavenly Angels website',
+            replyto: data.email || undefined,
+            ...data,
+          }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || json.success === false) throw new Error(json.message || 'Request failed');
+        showDone(data.name);
+      } catch {
+        status.textContent = 'Sorry, that didn’t go through. Please try again, or call us at 662-295-3257.';
+      } finally {
+        submit.disabled = false;
+        form.classList.remove('is-sending');
+      }
+    });
+  }
+</script>
+
+<style>
+  .visit {
+    position: relative; overflow: hidden; isolation: isolate;
+    padding: 160px 0 140px;
+    background: radial-gradient(ellipse at 50% 0%, var(--dusk) 0%, var(--twilight) 50%, var(--twilight-deep) 100%);
+  }
+  .visit-sky { position: absolute; inset: 0; z-index: -1; }
+  :global(.visit-moon) { position: absolute; top: 70px; right: 8%; width: 110px; z-index: -1; --dur: 9s; }
+  :global(.visit-cloud) { position: absolute; z-index: -1; opacity: 0.14; }
+  :global(.visit-cloud-1) { width: 340px; bottom: -50px; left: -70px; }
+  :global(.visit-cloud-2) { width: 260px; top: 38%; right: -60px; }
+
+  .visit-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 6vw, 88px); align-items: center; }
+  .visit-copy h2 { max-width: 12ch; }
+  .visit-copy .lede { color: var(--mist); max-width: 38ch; }
+  .visit-points { list-style: none; margin: 28px 0 32px; padding: 0; display: grid; gap: 12px; }
+  .visit-points li { display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 600; }
+  .visit-points li::before {
+    content: ''; width: 22px; height: 22px; flex: none; border-radius: 50%;
+    background: var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23151842' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+  }
+  .visit-call {
+    display: inline-flex; align-items: center; gap: 14px;
+    padding: 12px 22px 12px 12px; border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #fff; text-decoration: none; font: 800 1.25rem/1.1 var(--font-display);
+    transition: background-color 0.2s, transform 0.25s var(--ease-out);
+  }
+  .visit-call:hover { background: rgba(255, 255, 255, 0.14); transform: translateY(-2px); }
+  .visit-call small { display: block; font: 600 0.875rem/1.2 var(--font-body); color: var(--mist); margin-bottom: 4px; }
+  .visit-call-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--gold); color: var(--ink); }
+  .visit-call-icon :global(svg) { width: 22px; }
+
+  .visit-card {
+    position: relative;
+    padding: clamp(28px, 4vw, 44px);
+    border-radius: var(--r-panel);
+    background: var(--cream);
+    color: var(--ink);
+    box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.7);
+  }
+  .visit-dove {
+    position: absolute; top: -118px; right: 36px; width: 170px; height: auto;
+    transform: scaleX(-1);
+    filter: drop-shadow(0 18px 20px rgba(13, 15, 46, 0.35));
+    pointer-events: none;
+  }
+
+  .visit-form { display: grid; gap: 18px; }
+  .field { display: grid; gap: 8px; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field label, .field legend { font-weight: 700; font-size: 1rem; color: var(--ink); padding: 0; }
+  .field label span[aria-hidden] { color: #c2410c; }
+  .optional { font-weight: 500; font-size: 0.875rem; color: var(--ink-soft); margin-left: 4px; }
+  .field input:not([type='radio']), .field select, .field textarea {
+    width: 100%; min-height: 54px; padding: 13px 16px;
+    font: 500 1rem/1.4 var(--font-body); color: var(--ink);
+    background: #fff; border: 2px solid #e4e0f0; border-radius: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .field select {
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23151842' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") right 14px center / 20px no-repeat;
+    padding-right: 44px;
+  }
+  .field textarea { min-height: 96px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--indigo); box-shadow: 0 0 0 4px rgba(75, 82, 201, 0.18);
+  }
+  .field.has-error input { border-color: #dc2626; }
+  .field-err { margin: 0; font-size: 0.875rem; font-weight: 600; color: #b91c1c; }
+  .field-err:empty { display: none; }
+  .field-hint { margin: 0; font-size: 0.875rem; color: var(--ink-soft); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips legend { width: 100%; margin-bottom: 8px; }
+  .chips label { position: relative; cursor: pointer; }
+  .chips input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chips span {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px;
+    border-radius: 999px; border: 2px solid #e4e0f0; background: #fff;
+    font-weight: 700; font-size: 0.95rem; color: var(--ink-soft);
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .chips input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .chips input:focus-visible + span { outline: 3px solid var(--indigo); outline-offset: 2px; }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+  .visit-submit { width: 100%; min-height: 58px; font-size: 1.06rem; margin-top: 4px; position: relative; }
+  .visit-submit:disabled { cursor: progress; }
+  .spinner {
+    display: none; width: 20px; height: 20px; border-radius: 50%;
+    border: 3px solid rgba(21, 24, 66, 0.25); border-top-color: var(--ink);
+    animation: spin 0.8s linear infinite;
+  }
+  .is-sending .spinner { display: inline-block; }
+  .is-sending .label { opacity: 0.6; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .visit-consent { margin: 0; font-size: 0.875rem; color: var(--ink-soft); text-align: center; }
+  .visit-consent a { color: var(--indigo); }
+  .visit-status { margin: 0; font-weight: 700; color: #b91c1c; text-align: center; }
+  .visit-status:empty { display: none; }
+
+  .visit-done { text-align: center; padding: 24px 8px; outline: none; }
+  :global(.visit-done-icon) { width: 84px; margin: 0 auto 16px; }
+  .visit-done h3 { color: var(--ink); font-size: clamp(1.8rem, 3vw, 2.4rem); }
+  .visit-done p { color: var(--ink-soft); max-width: 36ch; margin-inline: auto; }
+  .visit-done-small { font-size: 0.95rem; }
+  .visit-done a { color: var(--indigo); font-weight: 700; }
+
+  @media (max-width: 960px) {
+    .visit-grid { grid-template-columns: 1fr; gap: 150px; }
+  }
+  @media (max-width: 640px) {
+    .visit { padding: 110px 0 90px; }
+    .visit-grid { gap: 120px; }
+    .visit-copy h2 { font-size: clamp(2rem, 9.6vw, 2.6rem); }
+    .visit-call { width: 100%; }
+    .visit-card { padding: 26px 18px 22px; border-radius: 26px; }
+    .visit-dove { width: 128px; top: -90px; right: 18px; }
+    .field-row { grid-template-columns: 1fr; gap: 18px; }
+    :global(.visit-moon) { width: 72px; top: 40px; }
+    :global(.visit-cloud-1) { width: 200px; }
+    :global(.visit-cloud-2) { width: 160px; }
+  }
+</style>

@@ -5,6 +5,7 @@ export const business = {
   url: 'https://heavenlyangelsms.com',
   phone: '662-295-3257',
   phoneHref: 'tel:+16622953257',
+  email: 'heavenlyangels1266@gmail.com',
   director: 'Angela Rice',
   bbb: 'https://www.bbb.org/us/ms/west-point/profile/adult-family-homes/heavenly-angels-llc-0523-235845861',
   city: 'West Point',
@@ -16,7 +17,9 @@ export const business = {
       city: 'West Point',
       region: 'MS',
       zip: '39773',
+      note: 'Staff on site 24 hours a day, 7 days a week',
       maps: 'https://maps.google.com/?q=1333+East+Broad+Street+West+Point+MS+39773',
+      embed: 'https://maps.google.com/maps?q=1333%20East%20Broad%20Street%2C%20West%20Point%2C%20MS%2039773&z=15&output=embed',
     },
     {
       label: 'Adult day services',
@@ -24,7 +27,9 @@ export const business = {
       city: 'West Point',
       region: 'MS',
       zip: '39773', // TODO: confirm ZIP with owner; the live site omits it
+      note: 'Call for day program hours',
       maps: 'https://maps.google.com/?q=26457+East+Main+Street+West+Point+MS',
+      embed: 'https://maps.google.com/maps?q=26457%20East%20Main%20Street%2C%20West%20Point%2C%20MS&z=14&output=embed',
     },
   ],
 };

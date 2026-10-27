@@ -1,0 +1,46 @@
+---
+// Plain-language privacy notice for the visit form and map. Owner should review before launch.
+import Base from '../layouts/Base.astro';
+import { business } from '../data/site';
+---
+<Base
+  title="Privacy | Heavenly Angels, West Point, MS"
+  description="How Heavenly Angels handles the information you share through our website's visit request form."
+>
+  <section class="legal">
+    <div class="wrap legal-inner">
+      <p class="eyebrow">Privacy</p>
+      <h1>Your information, handled with care</h1>
+      <p class="legal-updated">Last updated October 2026</p>
+
+      <h2>What we collect</h2>
+      <p>When you use the visit request form, we receive what you type in: your name, phone number, email (if you add it), who you’re reaching out for, the service you’re interested in, and any message you write. Please don’t include medical details in the form. We’ll talk those through by phone.</p>
+
+      <h2>How we use it</h2>
+      <p>We use it only to respond to your request, answer your questions, and set up a visit. We don’t sell or rent your information, and we don’t use it for advertising.</p>
+
+      <h2>Services that help run this site</h2>
+      <p>Form messages are delivered to our inbox by Web3Forms. The map is provided by Google Maps, which may set its own cookies when it loads. This website is hosted by Vercel. Each of these companies handles data under its own privacy policy.</p>
+
+      <h2>Questions or requests</h2>
+      <p>To ask what information we have from you, or to have it deleted, call <a href={business.phoneHref}>{business.phone}</a> or email <a href={`mailto:${business.email}`}>{business.email}</a>.</p>
+
+      <a class="btn btn-gold" href="/">Back to home</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import '../scripts/motion.ts';
+</script>
+
+<style>
+  .legal { padding: calc(var(--header-h) + var(--safe-top) + 72px) 0 120px; }
+  .legal-inner { max-width: 760px; }
+  .legal h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+  .legal h2 { font-size: clamp(1.15rem, 2vw, 1.4rem); margin-top: 40px; text-transform: none; font-family: var(--font-body); font-weight: 800; letter-spacing: 0; }
+  .legal p { max-width: 64ch; }
+  .legal a:not(.btn) { color: var(--gold); }
+  .legal-updated { color: var(--mist); font-size: 0.875rem; }
+  .legal .btn { margin-top: 32px; }
+</style>

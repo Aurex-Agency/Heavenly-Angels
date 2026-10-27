@@ -54,6 +54,7 @@ body {
 }
 
 img, svg { display: block; max-width: 100%; }
+[hidden] { display: none !important; }
 a { color: inherit; }
 p { margin: 0 0 1em; }
 

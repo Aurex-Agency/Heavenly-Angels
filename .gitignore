@@ -2,3 +2,6 @@ dist/
 node_modules/
 .astro/
 .DS_Store
+
+# macOS/iCloud duplicate copies
+* 2.*
