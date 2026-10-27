@@ -22,12 +22,12 @@ const faqSchema = {
 
 const moments = [
   { src: '/assets/photos/families-hug-640.webp', w: 640, h: 437, alt: 'A young man with Down syndrome hugged by his mother and father', caption: 'Family is always welcome', tilt: -3 },
-  { src: '/assets/photos/chef-cooking-640.webp', w: 640, h: 960, alt: 'A young man with Down syndrome in a chef’s apron cooking in a kitchen', caption: 'Helping in the kitchen', tilt: 2 },
-  { src: '/assets/photos/friends-laughing-640.webp', w: 640, h: 427, alt: 'Friends laughing together outdoors, one in a wheelchair', caption: 'Good friends', tilt: -2 },
-  { src: '/assets/photos/dancing-joy-640.webp', w: 640, h: 960, alt: 'A young man with Down syndrome dancing with a big smile', caption: 'Dance breaks encouraged', tilt: 3 },
-  { src: '/assets/photos/making-coffee-640.webp', w: 640, h: 427, alt: 'A smiling man with Down syndrome making coffee at an espresso machine', caption: 'Learning new skills', tilt: -2 },
-  { src: '/assets/photos/mirror-smile-640.webp', w: 640, h: 427, alt: 'A young man with Down syndrome smiling at himself in the bathroom mirror', caption: 'Ready for the day', tilt: 2 },
-  { src: '/assets/photos/family-silly-640.webp', w: 640, h: 427, alt: 'A young woman with Down syndrome and her mother making silly faces together', caption: 'Plenty of laughs', tilt: -3 },
+  { src: '/assets/photos/nurse-smiling.webp', w: 500, h: 500, alt: 'A smiling caregiver leaning in beside an older man', caption: 'Familiar faces', tilt: 2 },
+  { src: '/assets/photos/coloring-activity-640.webp', w: 640, h: 453, alt: 'A caregiver helping two older adults with a coloring activity', caption: 'Crafts at the table', tilt: -2 },
+  { src: '/assets/photos/waving-hello-640.webp', w: 640, h: 427, alt: 'An older couple smiling and waving hello in a bright room', caption: 'Always a warm hello', tilt: 3 },
+  { src: '/assets/photos/caregiver-smiling-640.webp', w: 640, h: 960, alt: 'A caregiver in scrubs and a head wrap laughing', caption: 'Staff who love what they do', tilt: -2 },
+  { src: '/assets/photos/nurse-walking.webp', w: 500, h: 500, alt: 'A caregiver walking outdoors with an older man using a walker', caption: 'Fresh air and a steady arm', tilt: 2 },
+  { src: '/assets/photos/nurse-wheelchair.webp', w: 500, h: 500, alt: 'A caregiver kneeling to talk with a smiling woman in a wheelchair', caption: 'Time to talk', tilt: -3 },
 ];
 
 const ticker = ['Home', 'Meals', 'Rides', 'Friends', 'Rest', 'Care', '24/7'];
@@ -44,46 +44,46 @@ const chapters = [
       { icon: 'pills', label: 'Morning medications, as prescribed', done: true },
     ] },
     dove: 'welcome',
-    photo: { src: 'breakfast-together', w: 1200, h: 801, alt: 'A young woman with Down syndrome eating breakfast at the table with a support person' },
+    photo: { src: 'cooking-together', w: 1200, h: 799, alt: 'People gathered around a kitchen table preparing a meal together' },
   },
   {
     time: '10:00 AM',
     part: 'Late morning',
     title: 'Something to look forward to',
-    text: 'Every day has something in it. Activities are planned around what each person enjoys, from music and crafts to exercise, games, and time outdoors.',
+    text: 'Every day has something in it. Activities are planned around what each person enjoys, from music and crafts to games and time outdoors.',
     card: { stamp: 'Today · 10:00 AM', items: [
       { icon: 'palette', label: 'Arts and crafts', done: true },
       { icon: 'heart', label: 'Music hour', done: false },
       { icon: 'sun', label: 'Walk outside, weather permitting', done: false },
     ] },
     dove: 'guide',
-    photo: { src: 'yoga-class', w: 1200, h: 801, alt: 'A young woman with Down syndrome stretching her arms up during a yoga class with an instructor' },
+    photo: { src: 'swing-joy', w: 1200, h: 800, alt: 'A man on a park swing throwing both arms up and laughing' },
   },
   {
     time: '1:30 PM',
     part: 'Afternoon',
     title: 'Out and about, never alone',
-    text: 'Doctor visit today? We drive. Staff go along with residents at home, on the road, and out in the community, whether it’s an appointment or a stop for ice cream on the way back. Residents keep the doctors they choose.',
+    text: 'Doctor visit today? We drive. Staff supervise and go along with residents at home, on the road, and out in the community, and residents keep the doctors they choose.',
     card: { stamp: 'Today · 1:30 PM', items: [
       { icon: 'van', label: 'Ride to the doctor, staff riding along', done: true },
       { icon: 'clipboard', label: 'Notes shared with the team', done: false },
       { icon: 'bowl', label: 'Back home for an afternoon snack', done: false },
     ] },
     dove: 'flight',
-    photo: { src: 'ice-cream-out', w: 1200, h: 800, alt: 'A young woman with Down syndrome enjoying ice cream at an outdoor café table' },
+    photo: { src: 'blood-pressure-check', w: 1200, h: 800, alt: 'A nurse checking an older man’s blood pressure at a table' },
   },
   {
     time: '5:30 PM',
     part: 'Evening',
     title: 'Supper and a clean, cozy room',
-    text: 'Three planned, nutritious meals a day, every day. Rooms are cleaned, linens are fresh, and hygiene products are always stocked, so there’s time to unwind with a favorite game or show.',
+    text: 'Three planned, nutritious meals a day, every day. Rooms are cleaned, linens are fresh, and hygiene products are always stocked, so home feels like home.',
     card: { stamp: 'Today · 5:30 PM', items: [
       { icon: 'bowl', label: 'Supper is served', done: true },
       { icon: 'towels', label: 'Fresh linens', done: true },
       { icon: 'scissors', label: 'Barber visit on the calendar', done: false },
     ] },
     dove: 'guide',
-    photo: { src: 'gaming-bedroom', w: 1200, h: 1800, alt: 'A young man with Down syndrome playing video games on his bed in a tidy bedroom' },
+    photo: { src: 'caregiver-laughing', w: 1200, h: 800, alt: 'A caregiver and an older woman laughing together in a living room' },
   },
   {
     time: '10:00 PM',
@@ -138,11 +138,11 @@ const chapters = [
         <div class="scene-layer" data-depth="0.4">
           <figure class="hs-photo">
             <img
-              src="/assets/photos/support-hug-1200.webp"
-              srcset="/assets/photos/support-hug-640.webp 640w, /assets/photos/support-hug-1200.webp 1200w"
+              src="/assets/photos/caregiver-joy-1200.webp"
+              srcset="/assets/photos/caregiver-joy-640.webp 640w, /assets/photos/caregiver-joy-1200.webp 1200w"
               sizes="(max-width: 960px) 80vw, 560px"
-              width="1200" height="800"
-              alt="A smiling young woman with Down syndrome hugged by a caring woman on a sunny patio"
+              width="1200" height="849"
+              alt="A caregiver and an older woman laughing together indoors"
               fetchpriority="high"
             />
           </figure>
@@ -219,11 +219,11 @@ const chapters = [
           <p class="program-addr">1333 East Broad Street, West Point</p>
           <figure class="program-photo">
             <img
-              src="/assets/photos/living-room-friends-640.webp"
-              srcset="/assets/photos/living-room-friends-640.webp 640w, /assets/photos/living-room-friends-1200.webp 1200w"
+              src="/assets/photos/wheelchair-support-640.webp"
+              srcset="/assets/photos/wheelchair-support-640.webp 640w, /assets/photos/wheelchair-support-1200.webp 1200w"
               sizes="(max-width: 960px) 90vw, 520px"
-              width="640" height="427" loading="lazy"
-              alt="A young woman with Down syndrome relaxing on a sofa with a friend in a bright, plant-filled living room"
+              width="640" height="960" loading="lazy"
+              alt="A caregiver standing beside a smiling man in a wheelchair"
             />
           </figure>
           <Prop name="house" class="program-prop" />
@@ -242,11 +242,11 @@ const chapters = [
           <p class="program-addr">26457 East Main Street, West Point</p>
           <figure class="program-photo">
             <img
-              src="/assets/photos/friends-outing-640.webp"
-              srcset="/assets/photos/friends-outing-640.webp 640w, /assets/photos/friends-outing-1200.webp 1200w"
+              src="/assets/photos/dancing-640.webp"
+              srcset="/assets/photos/dancing-640.webp 640w, /assets/photos/dancing-1200.webp 1200w"
               sizes="(max-width: 960px) 90vw, 520px"
               width="640" height="427" loading="lazy"
-              alt="A group of young adult friends, one using a wheelchair, laughing together on a waterfront bench"
+              alt="A woman dancing with a caregiver in a bright community room"
             />
           </figure>
           <Prop name="palette" class="program-prop" />
