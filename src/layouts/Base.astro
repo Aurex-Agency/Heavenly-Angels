@@ -20,7 +20,9 @@ const orgSchema = {
   url: business.url,
   telephone: `+1-${business.phone}`,
   description,
-  image: `${business.url}/assets/dove/welcome.webp`,
+  image: `${business.url}/assets/photos/caregiver-joy-1200.webp`,
+  logo: `${business.url}/assets/brand/logo.png`,
+  sameAs: [business.bbb],
   address: {
     '@type': 'PostalAddress',
     streetAddress: business.locations[0].street,
@@ -52,25 +54,27 @@ const orgSchema = {
     },
   ],
 };
+const pinIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>';
 const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1Z"/></svg>';
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#151842" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0d0f2e" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={`${business.url}/assets/dove/welcome.webp`} />
+    <meta property="og:image" content={`${business.url}/assets/photos/caregiver-joy-1200.webp`} />
     <meta name="robots" content="noindex" /> {/* prototype: remove at launch */}
-    <link rel="preload" as="image" href="/assets/dove/welcome.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/assets/brand/lockup.webp" />
     <script type="application/ld+json" set:html={JSON.stringify([orgSchema, ...schema])} />
   </head>
   <body>
@@ -78,9 +82,8 @@ const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="curre
 
     <header class="site-header" data-header>
       <div class="wrap header-inner">
-        <a class="brand" href="/" aria-label="Heavenly Angels home">
-          <img src="/assets/dove/guide.webp" alt="" width="48" height="43" />
-          <span>Heavenly Angels</span>
+        <a class="brand brand-badge" href="/" aria-label="Heavenly Angels home">
+          <img src="/assets/brand/lockup.webp" alt="Heavenly Angels LLC" width="1136" height="600" />
         </a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-btn>
           <span class="sr-only">Menu</span>
@@ -90,6 +93,11 @@ const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="curre
           <ul>
             {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
           </ul>
+          <div class="sheet-extra">
+            <a class="btn btn-gold" href={business.phoneHref}><Fragment set:html={phoneIcon} />Call {business.phone}</a>
+            <a class="btn btn-ghost" href={business.locations[0].maps} target="_blank" rel="noopener"><Fragment set:html={pinIcon} />Get directions</a>
+            <p>1333 East Broad Street · West Point, MS<br />Staff on site 24/7</p>
+          </div>
         </nav>
         <a class="btn btn-white header-call" href={business.phoneHref}>
           <Fragment set:html={phoneIcon} />
@@ -106,10 +114,12 @@ const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="curre
       <div class="wrap footer-grid">
         <div class="footer-brand">
           <a class="brand" href="/" aria-label="Heavenly Angels home">
-            <img src="/assets/dove/guide.webp" alt="" width="48" height="43" loading="lazy" />
-            <span>Heavenly Angels</span>
+            <img src="/assets/brand/lockup-on-dark.webp" alt="Heavenly Angels LLC" width="1136" height="600" loading="lazy" />
           </a>
           <p>Supervised living and adult day services for adults with disabilities in West Point, Mississippi.</p>
+          <a class="footer-bbb" href={business.bbb} target="_blank" rel="noopener">
+            <img src="/assets/brand/bbb-seal.png" alt="Heavenly Angels, LLC BBB Business Review" width="293" height="61" loading="lazy" />
+          </a>
         </div>
         {business.locations.map((loc) => (
           <div>
@@ -132,10 +142,10 @@ const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="curre
       </div>
     </footer>
 
-    <a class="call-bar" href={business.phoneHref}>
-      <Fragment set:html={phoneIcon} />
-      Call {business.phone}
-    </a>
+    <div class="dock" data-dock>
+      <a class="btn btn-gold" href={business.phoneHref}><Fragment set:html={phoneIcon} />Call us</a>
+      <a class="btn btn-white" href="#visit"><Fragment set:html={pinIcon} />Plan a visit</a>
+    </div>
 
     <style is:global>
       .skip {
@@ -147,36 +157,44 @@ const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="curre
 
       .site-header {
         position: fixed; inset: 0 0 auto; z-index: 50;
-        padding-block: 12px;
+        padding-block: 10px;
+        padding-top: max(10px, env(safe-area-inset-top));
         transition: background-color 0.3s, backdrop-filter 0.3s;
       }
       .site-header.scrolled {
-        background: rgba(13, 15, 46, 0.72);
+        background: rgba(13, 15, 46, 0.78);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
       }
       .header-inner { display: flex; align-items: center; gap: 24px; }
-      .brand {
-        display: inline-flex; align-items: center; gap: 10px;
-        text-decoration: none; color: #fff;
-        font: 800 1.25rem/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.01em;
+      .brand { display: inline-flex; align-items: center; flex: none; text-decoration: none; }
+      .brand-badge {
+        padding: 7px 16px 7px 10px; border-radius: 18px;
+        background: var(--cream);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45);
+        transform-origin: left center;
+        transition: transform 0.35s var(--ease-out);
       }
-      .brand img { width: 44px; height: auto; transition: transform 0.4s var(--ease-spring); }
-      .brand:hover img { transform: rotate(-10deg) scale(1.08); }
+      .brand-badge:hover { transform: rotate(-2deg); }
+      .site-header.scrolled .brand-badge { transform: scale(0.86); }
+      .brand-badge img { width: auto; height: 54px; }
       .site-nav { margin-left: auto; }
       .site-nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
-      .site-nav a {
+      .site-nav a:not(.btn) {
         display: block; padding: 10px 14px; border-radius: 999px;
         color: #fff; text-decoration: none; font-weight: 600; font-size: 1rem; white-space: nowrap;
         transition: background-color 0.2s;
       }
-      .site-nav a:hover { background: rgba(255, 255, 255, 0.1); }
+      .site-nav a:not(.btn):hover { background: rgba(255, 255, 255, 0.1); }
+      .sheet-extra { display: none; }
       .header-call { min-height: 46px; padding: 0 18px; font-size: 1rem; white-space: nowrap; flex: none; }
-      .brand { white-space: nowrap; flex: none; }
 
-      .site-footer { background: var(--twilight-deep); padding: 80px 0 120px; color: var(--mist); }
+      .site-footer { background: var(--twilight-deep); padding: 80px 0 48px; color: var(--mist); }
       .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+      .footer-brand img { width: 210px; height: auto; }
       .footer-brand p { margin-top: 18px; max-width: 30ch; }
+      .footer-bbb { display: inline-block; background: #fff; padding: 8px 10px; border-radius: 12px; }
+      .footer-bbb img { width: 180px; height: auto; }
       .footer-h {
         font: 700 0.875rem/1 var(--font-body); letter-spacing: 0.14em; text-transform: uppercase;
         color: #fff; margin-bottom: 14px;
@@ -191,14 +209,18 @@ const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="curre
         font-size: 0.875rem;
       }
 
-      .call-bar { display: none; }
+      .dock { display: none; }
       .menu-btn { display: none; }
+      body.menu-open { overflow: hidden; }
+      body.menu-open .site-header { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
 
       @media (max-width: 1080px) {
         .menu-btn {
+          position: relative; z-index: 2;
           display: grid; place-items: center; order: 3;
-          width: 48px; height: 48px; border-radius: 14px; border: 0; cursor: pointer;
+          width: 50px; height: 50px; border-radius: 16px; border: 0; cursor: pointer;
           background: rgba(255, 255, 255, 0.12); color: #fff;
+          -webkit-tap-highlight-color: transparent;
         }
         .menu-lines, .menu-lines::before, .menu-lines::after {
           display: block; width: 20px; height: 2px; border-radius: 2px; background: currentColor;
@@ -211,31 +233,89 @@ const phoneIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="curre
         [aria-expanded='true'] .menu-lines { background: transparent; }
         [aria-expanded='true'] .menu-lines::before { transform: translateY(6px) rotate(45deg); }
         [aria-expanded='true'] .menu-lines::after { transform: translateY(-6px) rotate(-45deg); }
+
+        /* Full-screen sheet */
         .site-nav {
-          position: absolute; top: calc(100% + 6px); left: var(--gutter); right: var(--gutter);
-          margin: 0; padding: 10px; border-radius: 20px;
-          background: var(--twilight-deep); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-          opacity: 0; visibility: hidden; transform: translateY(-8px);
-          transition: opacity 0.25s, transform 0.25s var(--ease-out), visibility 0.25s;
+          position: fixed; inset: 0; z-index: 1; margin: 0;
+          display: flex; flex-direction: column; justify-content: center;
+          padding: 110px var(--gutter) max(32px, env(safe-area-inset-bottom));
+          background:
+            radial-gradient(ellipse at 80% 0%, rgba(255, 197, 107, 0.16), transparent 55%),
+            linear-gradient(180deg, var(--twilight-deep), var(--dusk));
+          opacity: 0; visibility: hidden;
+          clip-path: circle(0% at calc(100% - 48px) 40px);
+          transition: clip-path 0.55s var(--ease-out), opacity 0.3s, visibility 0.55s;
         }
-        .site-nav.open { opacity: 1; visibility: visible; transform: none; }
-        .site-nav ul { flex-direction: column; }
-        .site-nav a { padding: 14px 16px; font-size: 1.25rem; border-radius: 12px; }
+        .site-nav.open { opacity: 1; visibility: visible; clip-path: circle(150% at calc(100% - 48px) 40px); }
+        .site-nav ul { flex-direction: column; gap: 2px; }
+        .site-nav a:not(.btn) {
+          padding: 12px 4px; border-radius: 0;
+          font: 800 clamp(1.6rem, 7.2vw, 2.6rem)/1.05 var(--font-display); text-transform: uppercase;
+          opacity: 0; transform: translateY(18px);
+          transition: opacity 0.4s, transform 0.5s var(--ease-out);
+        }
+        .site-nav a:not(.btn):hover { background: none; color: var(--gold); }
+        .site-nav.open a:not(.btn) { opacity: 1; transform: none; }
+        .site-nav.open li:nth-child(1) a { transition-delay: 0.12s; }
+        .site-nav.open li:nth-child(2) a { transition-delay: 0.17s; }
+        .site-nav.open li:nth-child(3) a { transition-delay: 0.22s; }
+        .site-nav.open li:nth-child(4) a { transition-delay: 0.27s; }
+        .sheet-extra { display: grid; gap: 12px; margin-top: 36px; }
+        .sheet-extra .btn { width: 100%; }
+        .sheet-extra p { margin: 8px 0 0; font-size: 0.875rem; color: var(--mist); }
         .header-call { margin-left: auto; }
+        .brand { position: relative; z-index: 2; }
         .footer-grid { grid-template-columns: 1fr 1fr; }
       }
       @media (max-width: 640px) {
+        :root { --header-h: 76px; }
+        /* Floating rounded bar instead of a full-width strip, so scrolling content isn't cut by a hard edge */
+        .site-header,
+        .site-header.scrolled {
+          padding: calc(var(--safe-top) + 8px) 10px 0;
+          background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+        }
+        .site-header .header-inner {
+          width: 100%; padding: 6px; border-radius: 22px;
+          border: 1px solid transparent;
+          transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .site-header.scrolled .header-inner {
+          background: rgba(13, 15, 46, 0.82);
+          backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+          border-color: rgba(255, 255, 255, 0.1);
+          box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.6);
+        }
+        body.menu-open .site-header .header-inner {
+          background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+          border-color: transparent; box-shadow: none;
+        }
+        .site-header.scrolled .brand-badge { transform: none; }
+        .brand-badge { padding: 5px 12px 5px 8px; border-radius: 15px; }
+        .brand-badge img { height: 44px; }
+        .site-nav { padding-top: calc(var(--header-h) + var(--safe-top) + 24px); }
         .header-call { display: none; }
         .menu-btn { margin-left: auto; }
-        .footer-grid { grid-template-columns: 1fr; }
-        .call-bar {
-          position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 60;
-          display: flex; align-items: center; justify-content: center; gap: 10px;
-          min-height: 56px; border-radius: 16px;
-          background: var(--gold); color: var(--ink); font-weight: 800; text-decoration: none;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        .site-footer { padding: 64px 0 calc(110px + env(safe-area-inset-bottom)); }
+        .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+        .footer-brand img { width: 190px; }
+
+        /* Floating action dock */
+        .dock {
+          position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 60;
+          display: grid; grid-template-columns: 1.15fr 1fr; gap: 8px;
+          padding: 8px; border-radius: 22px;
+          background: rgba(13, 15, 46, 0.82);
+          backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+          transform: translateY(calc(100% + 30px));
+          transition: transform 0.45s var(--ease-out);
         }
-        .call-bar svg { width: 20px; }
+        .dock.show { transform: none; }
+        .dock .btn { min-height: 52px; padding: 0 14px; font-size: 1rem; border-radius: 15px; }
+        .dock .btn:hover { transform: none; box-shadow: none; }
+        body.menu-open .dock { transform: translateY(calc(100% + 30px)); }
       }
     </style>
   </body>

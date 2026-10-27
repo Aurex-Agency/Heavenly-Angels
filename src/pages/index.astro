@@ -20,6 +20,16 @@ const faqSchema = {
   })),
 };
 
+const moments = [
+  { src: '/assets/photos/seniors-laughing-640.webp', w: 640, h: 427, alt: 'Three older adults laughing together over tea', caption: 'Good company', tilt: -3 },
+  { src: '/assets/photos/nurse-smiling.webp', w: 500, h: 500, alt: 'A smiling caregiver leaning in beside an older man', caption: 'Familiar faces', tilt: 2 },
+  { src: '/assets/photos/coloring-activity-640.webp', w: 640, h: 453, alt: 'A caregiver helping two older adults with a coloring activity', caption: 'Crafts at the table', tilt: -2 },
+  { src: '/assets/photos/waving-hello-640.webp', w: 640, h: 427, alt: 'An older couple smiling and waving hello in a bright room', caption: 'Always a warm hello', tilt: 3 },
+  { src: '/assets/photos/caregiver-smiling-640.webp', w: 640, h: 960, alt: 'A caregiver in scrubs and a head wrap laughing', caption: 'Staff who love what they do', tilt: -2 },
+  { src: '/assets/photos/nurse-walking.webp', w: 500, h: 500, alt: 'A caregiver walking outdoors with an older man using a walker', caption: 'Fresh air and a steady arm', tilt: 2 },
+  { src: '/assets/photos/nurse-wheelchair.webp', w: 500, h: 500, alt: 'A caregiver kneeling to talk with a smiling woman in a wheelchair', caption: 'Time to talk', tilt: -3 },
+];
+
 const ticker = ['Home', 'Meals', 'Rides', 'Friends', 'Rest', 'Care', '24/7'];
 
 const chapters = [
@@ -34,18 +44,20 @@ const chapters = [
       { icon: 'pills', label: 'Morning medications, as prescribed', done: true },
     ] },
     dove: 'welcome',
+    photo: { src: 'coffee-morning', w: 1200, h: 675, alt: 'Three older adults sharing coffee and conversation around a table at home' },
   },
   {
     time: '10:00 AM',
     part: 'Late morning',
     title: 'Something to look forward to',
-    text: 'Every day has something in it. Activities are planned around what each person enjoys, from music and crafts to games and time outdoors.',
+    text: 'Every day has something in it. Activities are planned around what each person enjoys, from music, crafts, and gentle exercise to games and time outdoors.',
     card: { stamp: 'Today · 10:00 AM', items: [
       { icon: 'palette', label: 'Arts and crafts', done: true },
       { icon: 'heart', label: 'Music hour', done: false },
       { icon: 'sun', label: 'Walk outside, weather permitting', done: false },
     ] },
     dove: 'guide',
+    photo: { src: 'exercise-class', w: 1200, h: 800, alt: 'Older women dancing and stretching together in a bright activity room' },
   },
   {
     time: '1:30 PM',
@@ -58,6 +70,7 @@ const chapters = [
       { icon: 'bowl', label: 'Back home for an afternoon snack', done: false },
     ] },
     dove: 'flight',
+    photo: { src: 'blood-pressure-check', w: 1200, h: 800, alt: 'A nurse checking an older man’s blood pressure at a table' },
   },
   {
     time: '5:30 PM',
@@ -70,6 +83,7 @@ const chapters = [
       { icon: 'scissors', label: 'Barber visit on the calendar', done: false },
     ] },
     dove: 'guide',
+    photo: { src: 'caregiver-laughing', w: 1200, h: 800, alt: 'A caregiver and an older woman laughing together in a living room' },
   },
   {
     time: '10:00 PM',
@@ -82,6 +96,7 @@ const chapters = [
       { icon: 'moon', label: 'Staff on duty until morning', done: true },
     ] },
     dove: 'flight',
+    photo: { src: 'porch', w: 1200, h: 800, alt: 'A covered front porch with rocking chairs and hanging plants' },
     night: true,
   },
 ];
@@ -109,6 +124,9 @@ const chapters = [
           <a class="btn btn-gold" href="#visit">Schedule a visit</a>
           <a class="btn btn-ghost" href={business.phoneHref}>Call {business.phone}</a>
         </div>
+        <a class="hero-trust" href={business.bbb} target="_blank" rel="noopener">
+          <img src="/assets/brand/bbb-seal.png" alt="Heavenly Angels, LLC BBB Business Review" width="293" height="61" />
+        </a>
       </div>
 
       <div class="hero-scene" aria-hidden="true" data-scene>
@@ -116,6 +134,18 @@ const chapters = [
           <Prop name="moon" class="hs-moon bob" />
           <Prop name="sparkle" class="hs-spark1 bob" />
           <Prop name="sparkle" class="hs-spark2 bob" />
+        </div>
+        <div class="scene-layer" data-depth="0.4">
+          <figure class="hs-photo">
+            <img
+              src="/assets/photos/caregiver-joy-1200.webp"
+              srcset="/assets/photos/caregiver-joy-640.webp 640w, /assets/photos/caregiver-joy-1200.webp 1200w"
+              sizes="(max-width: 960px) 80vw, 560px"
+              width="1200" height="849"
+              alt="A caregiver and an older woman laughing together indoors"
+              fetchpriority="high"
+            />
+          </figure>
         </div>
         <div class="scene-layer" data-depth="0.6">
           <svg class="hs-island" viewBox="0 0 400 190">
@@ -130,7 +160,6 @@ const chapters = [
             </g>
             <path d="M108 52c14-20 36-28 58-26M200 26c18-14 44-16 64-6" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".9" />
           </svg>
-          <Prop name="house" class="hs-house" />
           <img class="hs-dove" src="/assets/dove/welcome.webp" width="1402" height="1122" alt="" fetchpriority="high" />
         </div>
         <div class="scene-layer" data-depth="1">
@@ -188,6 +217,15 @@ const chapters = [
             <li>Rides to doctor visits</li>
           </ul>
           <p class="program-addr">1333 East Broad Street, West Point</p>
+          <figure class="program-photo">
+            <img
+              src="/assets/photos/nurse-resident-640.webp"
+              srcset="/assets/photos/nurse-resident-640.webp 640w, /assets/photos/nurse-resident-1200.webp 1200w"
+              sizes="(max-width: 960px) 90vw, 520px"
+              width="640" height="453" loading="lazy"
+              alt="A smiling caregiver sitting with an older woman in her room"
+            />
+          </figure>
           <Prop name="house" class="program-prop" />
         </article>
 
@@ -202,6 +240,15 @@ const chapters = [
             <li>Ask us about schedules</li>
           </ul>
           <p class="program-addr">26457 East Main Street, West Point</p>
+          <figure class="program-photo">
+            <img
+              src="/assets/photos/dancing-640.webp"
+              srcset="/assets/photos/dancing-640.webp 640w, /assets/photos/dancing-1200.webp 1200w"
+              sizes="(max-width: 960px) 90vw, 520px"
+              width="640" height="427" loading="lazy"
+              alt="A woman dancing with a caregiver in a bright community room"
+            />
+          </figure>
           <Prop name="palette" class="program-prop" />
         </article>
       </div>
@@ -222,6 +269,15 @@ const chapters = [
       <img class="day-dove" src="/assets/dove/flight.webp" width="1374" height="1145" alt="" loading="lazy" />
     </div>
 
+    <div class="day-clock-wrap" aria-hidden="true">
+      <div class="day-clock" data-clock>
+        <Prop name="sun" class="clock-sun" />
+        <Prop name="moon" class="clock-moon" />
+        <span data-clock-time>7:00 AM</span>
+        <em data-clock-part>Morning</em>
+      </div>
+    </div>
+
     <div class="day-content">
       <header class="wrap day-intro">
         <p class="eyebrow">A day at Heavenly Angels</p>
@@ -230,7 +286,7 @@ const chapters = [
       </header>
 
       {chapters.map((c, i) => (
-        <article class={`chapter${c.night ? ' chapter-night' : ''}`} data-chapter={i}>
+        <article class={`chapter${c.night ? ' chapter-night' : ''}`} data-chapter={i} data-time={c.time} data-part={c.part} data-night={c.night ? 'true' : undefined}>
           <div class="wrap">
             <div class={`chapter-panel reveal${i % 2 ? ' flip' : ''}`}>
               <img
@@ -246,7 +302,17 @@ const chapters = [
                 <h3>{c.title}</h3>
                 <p>{c.text}</p>
               </div>
-              <LifeCard stamp={c.card.stamp} items={c.card.items} />
+              <div class="chapter-media">
+                <figure class="chapter-photo">
+                  <img
+                    src={`/assets/photos/${c.photo.src}-640.webp`}
+                    srcset={`/assets/photos/${c.photo.src}-640.webp 640w, /assets/photos/${c.photo.src}-1200.webp 1200w`}
+                    sizes="(max-width: 960px) 90vw, 480px"
+                    width={c.photo.w} height={c.photo.h} loading="lazy" alt={c.photo.alt}
+                  />
+                </figure>
+                <LifeCard stamp={c.card.stamp} items={c.card.items} />
+              </div>
             </div>
           </div>
         </article>
@@ -262,12 +328,33 @@ const chapters = [
         <p class="eyebrow">Everything under one roof</p>
         <h2>The little things, handled</h2>
       </header>
+      <p class="swipe-hint" aria-hidden="true">Swipe to see more</p>
       <ul class="service-grid">
         {services.map((s, i) => (
           <li class="service reveal" data-delay={String(i % 4)}>
             <Prop name={s.prop} class="service-prop" />
             <h3>{s.title}</h3>
             <p>{s.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- MOMENTS GALLERY -->
+  <section class="moments" aria-labelledby="moments-title">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <p class="eyebrow">Good company</p>
+        <h2 id="moments-title">Life is better together</h2>
+      </header>
+    </div>
+    <div class="moments-rail" data-rail>
+      <ul class="moments-track">
+        {[...moments, ...moments].map((m, i) => (
+          <li class="moment" aria-hidden={i >= moments.length ? 'true' : undefined} style={`--tilt:${m.tilt}deg`}>
+            <img src={m.src} width={m.w} height={m.h} alt={i >= moments.length ? '' : m.alt} loading="lazy" />
+            <span>{m.caption}</span>
           </li>
         ))}
       </ul>
