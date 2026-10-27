@@ -1,0 +1,376 @@
+---
+import Base from '../layouts/Base.astro';
+import Prop from '../components/Prop.astro';
+import Stars from '../components/Stars.astro';
+import LifeCard from '../components/LifeCard.astro';
+import { business, services, faqs } from '../data/site';
+import '../styles/home.css';
+
+const title = 'Heavenly Angels | Supervised Living & Adult Day Services in West Point, MS';
+const description =
+  'Heavenly Angels offers 24/7 supervised living and adult day services for adults with intellectual and developmental disabilities and serious mental illness in West Point, Mississippi. Call 662-295-3257.';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const ticker = ['Home', 'Meals', 'Rides', 'Friends', 'Rest', 'Care', '24/7'];
+
+const chapters = [
+  {
+    time: '7:00 AM',
+    part: 'Morning',
+    title: 'Rise and shine',
+    text: 'Mornings start slow and easy. Staff help with grooming and getting ready, then everyone sits down to a warm breakfast made right here in the home.',
+    card: { stamp: 'Today · 7:00 AM', items: [
+      { icon: 'scissors', label: 'Help getting ready', done: true },
+      { icon: 'bowl', label: 'Breakfast at the table', done: true },
+      { icon: 'pills', label: 'Morning medications, as prescribed', done: true },
+    ] },
+    dove: 'welcome',
+  },
+  {
+    time: '10:00 AM',
+    part: 'Late morning',
+    title: 'Something to look forward to',
+    text: 'Every day has something in it. Activities are planned around what each person enjoys, from music and crafts to games and time outdoors.',
+    card: { stamp: 'Today · 10:00 AM', items: [
+      { icon: 'palette', label: 'Arts and crafts', done: true },
+      { icon: 'heart', label: 'Music hour', done: false },
+      { icon: 'sun', label: 'Walk outside, weather permitting', done: false },
+    ] },
+    dove: 'guide',
+  },
+  {
+    time: '1:30 PM',
+    part: 'Afternoon',
+    title: 'Out and about, never alone',
+    text: 'Doctor visit today? We drive. Staff supervise and go along with residents at home, on the road, and out in the community, and residents keep the doctors they choose.',
+    card: { stamp: 'Today · 1:30 PM', items: [
+      { icon: 'van', label: 'Ride to the doctor, staff riding along', done: true },
+      { icon: 'clipboard', label: 'Notes shared with the team', done: false },
+      { icon: 'bowl', label: 'Back home for an afternoon snack', done: false },
+    ] },
+    dove: 'flight',
+  },
+  {
+    time: '5:30 PM',
+    part: 'Evening',
+    title: 'Supper and a clean, cozy room',
+    text: 'Three planned, nutritious meals a day, every day. Rooms are cleaned, linens are fresh, and hygiene products are always stocked, so home feels like home.',
+    card: { stamp: 'Today · 5:30 PM', items: [
+      { icon: 'bowl', label: 'Supper is served', done: true },
+      { icon: 'towels', label: 'Fresh linens', done: true },
+      { icon: 'scissors', label: 'Barber visit on the calendar', done: false },
+    ] },
+    dove: 'guide',
+  },
+  {
+    time: '10:00 PM',
+    part: 'Night',
+    title: 'Lights out. Staff still here.',
+    text: 'When the house goes quiet, care doesn’t clock out. Staff are on site through the night, every night of the year.',
+    card: { stamp: 'Tonight · 10:00 PM', items: [
+      { icon: 'pills', label: 'Evening medications, as prescribed', done: true },
+      { icon: 'house', label: 'Doors checked, porch light on', done: true },
+      { icon: 'moon', label: 'Staff on duty until morning', done: true },
+    ] },
+    dove: 'flight',
+    night: true,
+  },
+];
+---
+<Base title={title} description={description} schema={[faqSchema]}>
+  <!-- HERO -->
+  <section class="hero" data-hero>
+    <div class="hero-sky" aria-hidden="true">
+      <Stars count={70} seed={7} />
+      <div class="hero-glow"></div>
+    </div>
+
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow hero-eyebrow">
+          <span class="online-dot" aria-hidden="true"></span>
+          West Point, Mississippi · Staff on site 24/7
+        </p>
+        <h1>Supervised living that feels like home</h1>
+        <p class="lede">
+          Round-the-clock support, home-cooked meals, and rides to every appointment, for adults with
+          intellectual and developmental disabilities and serious mental illness.
+        </p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#visit">Schedule a visit</a>
+          <a class="btn btn-ghost" href={business.phoneHref}>Call {business.phone}</a>
+        </div>
+      </div>
+
+      <div class="hero-scene" aria-hidden="true" data-scene>
+        <div class="scene-layer" data-depth="0.25">
+          <Prop name="moon" class="hs-moon bob" />
+          <Prop name="sparkle" class="hs-spark1 bob" />
+          <Prop name="sparkle" class="hs-spark2 bob" />
+        </div>
+        <div class="scene-layer" data-depth="0.6">
+          <svg class="hs-island" viewBox="0 0 400 190">
+            <defs>
+              <linearGradient id="island" x1="0" y1="10" x2="0" y2="190" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#ffffff" /><stop offset=".6" stop-color="#f1ecfb" /><stop offset="1" stop-color="#c9c0ec" />
+              </linearGradient>
+            </defs>
+            <g fill="url(#island)">
+              <circle cx="72" cy="122" r="50" /><circle cx="142" cy="92" r="68" /><circle cx="232" cy="82" r="74" />
+              <circle cx="312" cy="106" r="58" /><circle cx="356" cy="138" r="38" /><rect x="34" y="118" width="350" height="64" rx="32" />
+            </g>
+            <path d="M108 52c14-20 36-28 58-26M200 26c18-14 44-16 64-6" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".9" />
+          </svg>
+          <Prop name="house" class="hs-house" />
+          <img class="hs-dove" src="/assets/dove/welcome.webp" width="1402" height="1122" alt="" fetchpriority="high" />
+        </div>
+        <div class="scene-layer" data-depth="1">
+          <div class="chip chip-status bob">
+            <img src="/assets/dove/guide.webp" alt="" width="40" height="36" />
+            <span><strong>Staff on duty</strong><em><i class="online-dot"></i> Here right now</em></span>
+          </div>
+          <div class="chip chip-meal bob">
+            <Prop name="bowl" size={34} />
+            <span><strong>3 meals a day</strong><em>Made fresh in the home</em></span>
+          </div>
+          <Prop name="heart" class="hs-heart bob" />
+          <Prop name="star" class="hs-star bob" />
+        </div>
+      </div>
+    </div>
+
+    <svg class="hero-clouds" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#2B2F7A" opacity=".55" d="M0 90c80-40 160-40 240-10 60-50 170-60 240-10 70-40 170-40 230 10 80-50 190-40 250 0 60-40 160-50 230 0 70-40 170-30 250 10v120H0Z" />
+      <path fill="#151842" d="M0 120c90-30 170-20 230 10 70-40 180-40 250 0 80-40 180-30 240 10 70-40 170-40 240 0 70-30 170-30 240 0 60-30 160-30 240 0v60H0Z" />
+    </svg>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      {[0, 1].map(() => (
+        <div class="ticker-set">
+          {ticker.map((word) => (
+            <span class="ticker-item">{word}<Prop name="sparkle" size={22} /></span>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- PROGRAMS -->
+  <section class="programs" id="programs">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <p class="eyebrow">Two ways we help</p>
+        <h2>Care that fits the person</h2>
+        <p class="lede">Live with us full time, or spend your days with us. Either way, you’re family here.</p>
+      </header>
+
+      <div class="program-grid">
+        <article class="program program-live reveal">
+          <img class="program-dove" src="/assets/dove/guide.webp" width="672" height="598" alt="" loading="lazy" />
+          <p class="program-tag">Live here</p>
+          <h3>Supervised living</h3>
+          <p>A calm, clean, homelike place to live, with trained staff on site day and night. We help with daily routines, meals, medications, and getting to appointments, so families get peace of mind.</p>
+          <ul class="program-list">
+            <li>Staff on site 24/7</li>
+            <li>Three meals a day</li>
+            <li>Rides to doctor visits</li>
+          </ul>
+          <p class="program-addr">1333 East Broad Street, West Point</p>
+          <Prop name="house" class="program-prop" />
+        </article>
+
+        <article class="program program-day reveal" data-delay="1">
+          <img class="program-dove program-dove-fly" src="/assets/dove/flight.webp" width="1374" height="1145" alt="" loading="lazy" />
+          <p class="program-tag">Spend the day</p>
+          <h3>Adult day services</h3>
+          <p>Somewhere good to be during the day. Company, activities, and support for adults with disabilities, while caregivers get time to work or rest.</p>
+          <ul class="program-list">
+            <li>Daily activities</li>
+            <li>Friendly, steady staff</li>
+            <li>Ask us about schedules</li>
+          </ul>
+          <p class="program-addr">26457 East Main Street, West Point</p>
+          <Prop name="palette" class="program-prop" />
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY CYCLE -->
+  <section class="day" id="a-day-here" data-day>
+    <div class="day-sky" aria-hidden="true">
+      <div class="day-stars"><Stars count={60} seed={21} /></div>
+      <div class="day-arc">
+        <Prop name="sun" class="day-sun" />
+        <Prop name="moon" class="day-moon" />
+      </div>
+      <Prop name="cloud" class="day-cloud day-cloud-1" />
+      <Prop name="cloud" class="day-cloud day-cloud-2" />
+      <Prop name="cloud" class="day-cloud day-cloud-3" />
+      <img class="day-dove" src="/assets/dove/flight.webp" width="1374" height="1145" alt="" loading="lazy" />
+    </div>
+
+    <div class="day-content">
+      <header class="wrap day-intro">
+        <p class="eyebrow">A day at Heavenly Angels</p>
+        <h2>Sunrise to lights out, someone’s here</h2>
+        <p class="lede">Scroll through a typical day. Every routine is shaped around the person living it.</p>
+      </header>
+
+      {chapters.map((c, i) => (
+        <article class={`chapter${c.night ? ' chapter-night' : ''}`} data-chapter={i}>
+          <div class="wrap">
+            <div class={`chapter-panel reveal${i % 2 ? ' flip' : ''}`}>
+              <img
+                class={`chapter-dove dove-${c.dove}`}
+                src={`/assets/dove/${c.dove}.webp`}
+                alt=""
+                loading="lazy"
+                width={c.dove === 'guide' ? 672 : c.dove === 'welcome' ? 1402 : 1374}
+                height={c.dove === 'guide' ? 598 : c.dove === 'welcome' ? 1122 : 1145}
+              />
+              <div class="chapter-copy">
+                <p class="chapter-time"><span>{c.time}</span>{c.part}</p>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </div>
+              <LifeCard stamp={c.card.stamp} items={c.card.items} />
+            </div>
+          </div>
+        </article>
+      ))}
+      <p class="wrap day-note">A sample day. Routines, activities, and appointments vary for each resident.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <p class="eyebrow">Everything under one roof</p>
+        <h2>The little things, handled</h2>
+      </header>
+      <ul class="service-grid">
+        {services.map((s, i) => (
+          <li class="service reveal" data-delay={String(i % 4)}>
+            <Prop name={s.prop} class="service-prop" />
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ABOUT ANGELA -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="about-panel reveal">
+        <div class="about-badge" aria-hidden="true">
+          <span>AR</span>
+          <img src="/assets/dove/welcome.webp" width="1402" height="1122" alt="" loading="lazy" />
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">Meet the director</p>
+          <h2>Led by a nurse with 20+ years of experience</h2>
+          <p>
+            Angela Rice directs Heavenly Angels. She holds degrees in science and brings more than twenty
+            years of nursing health care experience to every resident’s care.
+          </p>
+          <p>
+            Her approach is simple: be open and honest with families, treat every resident with dignity, and
+            make the house feel like a real home.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GETTING STARTED -->
+  <section class="start" id="getting-started">
+    <div class="wrap start-grid">
+      <div class="start-copy reveal">
+        <p class="eyebrow">Getting started</p>
+        <h2>It starts with one conversation</h2>
+        <p class="lede">Whether you’re a parent, a sibling, a case manager, or looking for yourself, we’ll walk you through it.</p>
+        <a class="btn btn-gold" href={business.phoneHref}>Call {business.phone}</a>
+      </div>
+
+      <ol class="chat reveal" data-delay="1">
+        <li class="chat-step">
+          <p class="chat-divider"><span>Step 1 · Call us</span></p>
+          <div class="msg msg-you"><p>Hi! I’m looking for a supervised living home for my brother.</p></div>
+          <div class="msg msg-ha">
+            <img src="/assets/dove/guide.webp" alt="" width="40" height="36" loading="lazy" />
+            <p>We’d love to help. Tell us a little about him and what he needs day to day.</p>
+          </div>
+        </li>
+        <li class="chat-step">
+          <p class="chat-divider"><span>Step 2 · Come visit</span></p>
+          <div class="msg msg-ha">
+            <img src="/assets/dove/guide.webp" alt="" width="40" height="36" loading="lazy" />
+            <p>Come see the home, meet the staff, and bring every question you’ve got.</p>
+          </div>
+        </li>
+        <li class="chat-step">
+          <p class="chat-divider"><span>Step 3 · Find the right fit</span></p>
+          <div class="msg msg-ha">
+            <img src="/assets/dove/guide.webp" alt="" width="40" height="36" loading="lazy" />
+            <p>We’ll talk through support needs, costs, and availability together, no pressure.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="wrap faq-grid">
+      <header class="section-head reveal">
+        <p class="eyebrow">Good questions</p>
+        <h2>Families often ask</h2>
+      </header>
+      <div class="faq-list reveal" data-delay="1">
+        {faqs.map((f) => (
+          <details>
+            <summary>{f.q}<span class="faq-plus" aria-hidden="true"></span></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing" id="visit">
+    <div class="closing-sky" aria-hidden="true"><Stars count={50} seed={99} /></div>
+    <div class="wrap closing-inner">
+      <img class="closing-dove" src="/assets/dove/flight.webp" width="1374" height="1145" alt="" loading="lazy" />
+      <h2>You’ve reached the top of the sky.</h2>
+      <p class="lede">Let’s talk. Call us, or come by and see the home for yourself.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href={business.phoneHref}>Call {business.phone}</a>
+        <a class="btn btn-ghost" href={business.locations[0].maps} target="_blank" rel="noopener">Get directions</a>
+      </div>
+    </div>
+    <Prop name="moon" class="closing-moon bob" />
+    <Prop name="cloud" class="closing-cloud closing-cloud-1" />
+    <Prop name="cloud" class="closing-cloud closing-cloud-2" />
+  </section>
+</Base>
+
+<script>
+  import '../scripts/motion.ts';
+</script>

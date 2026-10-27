@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "createdAt": "2026-10-27T16:04:28.160Z",
+        "reason": "Claude design decision: small spring overshoot on hover lifts and chat/checkmark pop-ins is the intended playful Discord-style motion for this brand; reduced-motion disables it"
+      }
+    ]
+  }
+}

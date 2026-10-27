@@ -1,25 +1,24 @@
-# Heavenly Angels — first website build
+# Heavenly Angels website (rebuild)
 
-A responsive, statically generated marketing website for Heavenly Angels in West Point, Mississippi. No runtime framework or build dependencies; Node 20+ is required.
+Astro site for Heavenly Angels, a supervised living home and adult day program in West Point, Mississippi. This branch (`rebuild`) replaces the first-round static build with a Discord-inspired "twilight sky" design: bold all-caps type, rounded gradient panels, the dove mascot perched on panel edges, and a scroll-driven day-to-night sky.
 
 ```sh
-npm run build
-npm test
-npm run dev
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # static output in dist/
 ```
 
-Preview: http://127.0.0.1:4173. Deploy the generated `dist/` folder to any static host with directory index support. Use `404.html` for missing routes. No SPA fallback is needed.
+## Where things live
 
-## Editing
+- `src/pages/index.astro`: homepage sections and day-cycle chapter content.
+- `src/data/site.ts`: business facts (addresses, phone), services, FAQs. Edit content here first.
+- `src/components/Prop.astro`: clay-style SVG props, one per service.
+- `src/components/LifeCard.astro`: app-style "today" cards used in the day cycle.
+- `src/scripts/motion.ts`: header state, mobile menu, reveals, hero parallax, day-cycle sky.
+- `src/styles/global.css`: design tokens and base styles. `src/styles/home.css`: homepage.
+- `public/assets/dove/`: dove poses (welcome, flight, guide).
+- `docs/content-sources.md`: where each business fact came from and what the owner must confirm.
 
-- `scripts/build.mjs`: page content, shared layouts, metadata, structured data, sitemap.
-- `src/styles.css`: responsive visual system and reduced-motion behavior.
-- `src/site.js`: accessible mobile menu and progressive section reveals.
-- `public/assets/`: original mascot asset and SVG brand mark.
-- `docs/content-sources.md`: source ledger, discrepancies, and launch confirmations.
+## Prototype status
 
-The contact flow uses telephone and directions links. It does not pretend to submit a form. No email delivery, CRM, analytics, payment, or booking service is configured.
-
-## Deployment review
-
-This is a first-round design, not a replacement already deployed to the live domain. Confirm the business details in the source ledger before launch. Replace the concept identity if the owner prefers the existing logo. Four care photos have been carried over from the current website; see docs/photo-sources.md for provenance and license-continuity review. Add verified facility and staff photographs when available. The dove is an illustration, not a representation of the physical facility. Review privacy text against the eventual hosting/analytics stack. Add host-level redirects if existing URLs are discovered in Search Console. The canonical domain is https://heavenlyangelsms.com; protect staging from indexing at the host until launch.
+Homepage only. The page carries `noindex` until launch (see `src/layouts/Base.astro`). Interior pages (Supervised Living, Adult Day Services, Getting Started, About, Golden Triangle service area, Contact) come next, along with a visit-request form, additional dove poses, and permission-cleared photography.

@@ -1,0 +1,192 @@
+---
+// Soft "clay" illustrations for each service. Decorative: always aria-hidden.
+interface Props {
+  name:
+    | 'bowl' | 'van' | 'pills' | 'scissors' | 'moon' | 'house' | 'sun'
+    | 'towels' | 'palette' | 'clipboard' | 'cloud' | 'sparkle' | 'heart' | 'star';
+  class?: string;
+  size?: number;
+}
+const { name, class: className = '', size } = Astro.props;
+const id = `p${Math.random().toString(36).slice(2, 8)}`;
+const g = (n: string) => `${id}-${n}`;
+---
+<svg
+  class={`prop prop-${name} ${className}`}
+  viewBox="0 0 120 120"
+  width={size}
+  height={size}
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <radialGradient id={g('cream')} cx="35%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#FFFDF8" /><stop offset="1" stop-color="#E9DCC6" />
+    </radialGradient>
+    <radialGradient id={g('peach')} cx="35%" cy="28%" r="85%">
+      <stop offset="0" stop-color="#FFC9A8" /><stop offset="1" stop-color="#E5835E" />
+    </radialGradient>
+    <radialGradient id={g('blue')} cx="35%" cy="28%" r="85%">
+      <stop offset="0" stop-color="#C9DEFA" /><stop offset="1" stop-color="#6F94D6" />
+    </radialGradient>
+    <radialGradient id={g('lav')} cx="35%" cy="28%" r="85%">
+      <stop offset="0" stop-color="#E6DEFF" /><stop offset="1" stop-color="#9C8AE0" />
+    </radialGradient>
+    <radialGradient id={g('gold')} cx="35%" cy="28%" r="85%">
+      <stop offset="0" stop-color="#FFE7AE" /><stop offset="1" stop-color="#F2A93B" />
+    </radialGradient>
+    <radialGradient id={g('green')} cx="35%" cy="28%" r="85%">
+      <stop offset="0" stop-color="#C9EDB8" /><stop offset="1" stop-color="#6DB36A" />
+    </radialGradient>
+    <radialGradient id={g('navy')} cx="35%" cy="28%" r="85%">
+      <stop offset="0" stop-color="#4B5199" /><stop offset="1" stop-color="#1B1F52" />
+    </radialGradient>
+  </defs>
+
+  {name === 'bowl' && (
+    <g>
+      <ellipse cx="60" cy="104" rx="40" ry="6" fill="#000" opacity=".14" />
+      <path d="M44 34c-6-8 6-12 0-20M60 32c-6-8 6-12 0-20M76 34c-6-8 6-12 0-20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".75" />
+      <ellipse cx="60" cy="56" rx="44" ry="13" fill={`url(#${g('cream')})`} />
+      <path d="M16 56c0 26 20 42 44 42s44-16 44-42" fill={`url(#${g('peach')})`} />
+      <ellipse cx="60" cy="56" rx="38" ry="9" fill="#F7C66A" />
+      <circle cx="46" cy="55" r="5" fill={`url(#${g('green')})`} />
+      <circle cx="62" cy="53" r="4" fill="#E5835E" />
+      <circle cx="74" cy="57" r="4.5" fill={`url(#${g('green')})`} />
+      <path d="M26 66c4 12 14 20 26 22" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".45" />
+    </g>
+  )}
+
+  {name === 'van' && (
+    <g>
+      <ellipse cx="60" cy="102" rx="46" ry="6" fill="#000" opacity=".14" />
+      <path d="M14 48c0-12 8-18 20-18h38c10 0 16 4 22 12l10 14c4 5 4 8 4 14v14c0 6-4 10-10 10H22c-5 0-8-4-8-9Z" fill={`url(#${g('blue')})`} />
+      <path d="M72 38h14c5 0 8 2 11 6l7 10H72Z" fill="#1B1F52" opacity=".85" />
+      <rect x="24" y="38" width="40" height="18" rx="6" fill="#1B1F52" opacity=".85" />
+      <path d="M38 70c-6-5-12-1-9 5 2 4 9 8 9 8s7-4 9-8c3-6-3-10-9-5Z" fill="#fff" />
+      <circle cx="34" cy="94" r="11" fill={`url(#${g('navy')})`} /><circle cx="34" cy="94" r="4" fill="#E9DCC6" />
+      <circle cx="88" cy="94" r="11" fill={`url(#${g('navy')})`} /><circle cx="88" cy="94" r="4" fill="#E9DCC6" />
+      <rect x="104" y="70" width="8" height="6" rx="3" fill="#FFE7AE" />
+      <path d="M22 44c2-6 6-8 12-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".55" />
+    </g>
+  )}
+
+  {name === 'pills' && (
+    <g>
+      <ellipse cx="60" cy="100" rx="46" ry="6" fill="#000" opacity=".14" />
+      <rect x="12" y="44" width="96" height="50" rx="16" fill={`url(#${g('lav')})`} />
+      <rect x="12" y="30" width="96" height="22" rx="11" fill="#E6DEFF" />
+      <g fill="#7A68C8" opacity=".55">
+        <rect x="20" y="58" width="18" height="28" rx="7" /><rect x="42" y="58" width="18" height="28" rx="7" />
+        <rect x="64" y="58" width="18" height="28" rx="7" /><rect x="86" y="58" width="16" height="28" rx="7" />
+      </g>
+      <rect x="22" y="66" width="14" height="7" rx="3.5" fill="#fff" transform="rotate(-20 29 69)" />
+      <circle cx="51" cy="72" r="5" fill="#FFC9A8" />
+      <rect x="66" y="66" width="14" height="7" rx="3.5" fill={`url(#${g('gold')})`} transform="rotate(25 73 69)" />
+      <circle cx="94" cy="74" r="4.5" fill="#C9DEFA" />
+      <path d="M22 37h40" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".7" />
+    </g>
+  )}
+
+  {name === 'scissors' && (
+    <g>
+      <ellipse cx="60" cy="104" rx="40" ry="5" fill="#000" opacity=".14" />
+      <rect x="64" y="14" width="18" height="84" rx="7" fill={`url(#${g('blue')})`} transform="rotate(18 73 56)" />
+      <g stroke="#4D6FB0" stroke-width="3" stroke-linecap="round" transform="rotate(18 73 56)">
+        <path d="M64 24h-8M64 34h-8M64 44h-8M64 54h-8M64 64h-8M64 74h-8M64 84h-8" />
+      </g>
+      <path d="M30 18l26 50M58 18L32 68" stroke="#C9CCD8" stroke-width="7" stroke-linecap="round" />
+      <circle cx="44" cy="44" r="3" fill="#8A8FA8" />
+      <circle cx="26" cy="82" r="13" fill="none" stroke={`url(#${g('gold')})`} stroke-width="8" />
+      <circle cx="58" cy="82" r="13" fill="none" stroke={`url(#${g('gold')})`} stroke-width="8" />
+    </g>
+  )}
+
+  {name === 'moon' && (
+    <g>
+      <path d="M78 16a44 44 0 1 0 26 66A36 36 0 0 1 78 16Z" fill={`url(#${g('gold')})`} />
+      <circle cx="46" cy="58" r="6" fill="#E89A2E" opacity=".35" />
+      <circle cx="58" cy="84" r="4" fill="#E89A2E" opacity=".35" />
+      <path d="M34 36c6-8 14-12 22-13" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".6" />
+    </g>
+  )}
+
+  {name === 'house' && (
+    <g>
+      <ellipse cx="60" cy="106" rx="46" ry="6" fill="#000" opacity=".14" />
+      <path d="M24 54h72v42c0 5-3 8-8 8H32c-5 0-8-3-8-8Z" fill={`url(#${g('cream')})`} />
+      <path d="M12 58 56 20c3-2 5-2 8 0l44 38c3 3 1 8-3 8H15c-4 0-6-5-3-8Z" fill={`url(#${g('peach')})`} />
+      <rect x="34" y="66" width="20" height="18" rx="5" fill={`url(#${g('gold')})`} />
+      <path d="M44 66v18M34 75h20" stroke="#E5A23A" stroke-width="2.5" />
+      <rect x="66" y="70" width="20" height="34" rx="8" fill={`url(#${g('blue')})`} />
+      <circle cx="81" cy="88" r="2" fill="#1B1F52" />
+      <path d="M58 30 22 61" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".45" />
+    </g>
+  )}
+
+  {name === 'sun' && (
+    <g>
+      <g stroke="#FFD27A" stroke-width="8" stroke-linecap="round">
+        <path d="M60 6v12M60 102v12M6 60h12M102 60h12M22 22l8 8M90 90l8 8M22 98l8-8M90 30l8-8" />
+      </g>
+      <circle cx="60" cy="60" r="32" fill={`url(#${g('gold')})`} />
+      <path d="M42 50c3-8 10-12 18-13" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".6" />
+    </g>
+  )}
+
+  {name === 'towels' && (
+    <g>
+      <ellipse cx="60" cy="104" rx="44" ry="6" fill="#000" opacity=".14" />
+      <rect x="18" y="74" width="84" height="26" rx="12" fill={`url(#${g('blue')})`} />
+      <rect x="22" y="52" width="76" height="24" rx="11" fill={`url(#${g('lav')})`} />
+      <rect x="26" y="32" width="68" height="22" rx="10" fill={`url(#${g('cream')})`} />
+      <path d="M30 86h60M34 63h52" stroke="#fff" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round" opacity=".7" />
+      <circle cx="88" cy="20" r="8" fill="#fff" opacity=".9" /><circle cx="102" cy="34" r="5" fill="#fff" opacity=".75" /><circle cx="76" cy="12" r="4" fill="#fff" opacity=".7" />
+    </g>
+  )}
+
+  {name === 'palette' && (
+    <g>
+      <ellipse cx="60" cy="104" rx="42" ry="6" fill="#000" opacity=".14" />
+      <path d="M60 14c28 0 48 18 48 40 0 14-10 18-20 16-8-2-14 2-12 10 3 10-4 18-16 18-28 0-48-20-48-42S32 14 60 14Z" fill={`url(#${g('cream')})`} />
+      <circle cx="38" cy="42" r="8" fill={`url(#${g('peach')})`} />
+      <circle cx="60" cy="32" r="8" fill={`url(#${g('gold')})`} />
+      <circle cx="82" cy="40" r="8" fill={`url(#${g('blue')})`} />
+      <circle cx="34" cy="66" r="8" fill={`url(#${g('green')})`} />
+      <circle cx="56" cy="80" r="7" fill={`url(#${g('lav')})`} />
+    </g>
+  )}
+
+  {name === 'clipboard' && (
+    <g>
+      <ellipse cx="60" cy="106" rx="38" ry="5" fill="#000" opacity=".14" />
+      <rect x="22" y="18" width="76" height="86" rx="14" fill={`url(#${g('peach')})`} />
+      <rect x="30" y="28" width="60" height="68" rx="8" fill="#FFFDF8" />
+      <rect x="44" y="12" width="32" height="16" rx="8" fill={`url(#${g('navy')})`} />
+      <path d="M60 52c-7-6-15-1-11 6 3 5 11 10 11 10s8-5 11-10c4-7-4-12-11-6Z" fill="#E5835E" />
+      <path d="M40 80h40M40 88h26" stroke="#C9CCD8" stroke-width="4" stroke-linecap="round" />
+    </g>
+  )}
+
+  {name === 'cloud' && (
+    <g>
+      <path d="M28 92c-14 0-22-9-22-20s9-20 21-20c2-16 14-28 31-28 15 0 27 9 31 23 13 0 25 10 25 23 0 12-10 22-23 22Z" fill={`url(#${g('cream')})`} />
+      <path d="M30 60c2-12 10-20 22-22" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".8" />
+    </g>
+  )}
+
+  {name === 'sparkle' && (
+    <path d="M60 8c4 30 22 48 52 52-30 4-48 22-52 52-4-30-22-48-52-52 30-4 48-22 52-52Z" fill={`url(#${g('gold')})`} />
+  )}
+
+  {name === 'star' && (
+    <path d="M60 10l13 30 32 3-24 21 7 32-28-17-28 17 7-32-24-21 32-3Z" fill={`url(#${g('gold')})`} stroke="#FFE7AE" stroke-width="4" stroke-linejoin="round" />
+  )}
+
+  {name === 'heart' && (
+    <g>
+      <path d="M60 104S12 76 12 44c0-18 13-30 28-30 9 0 16 4 20 12 4-8 11-12 20-12 15 0 28 12 28 30 0 32-48 60-48 60Z" fill={`url(#${g('peach')})`} />
+      <path d="M26 40c0-8 6-14 14-14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".6" />
+    </g>
+  )}
+</svg>
