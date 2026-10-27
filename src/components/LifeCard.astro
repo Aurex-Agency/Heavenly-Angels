@@ -1,0 +1,77 @@
+---
+// App-style "today" card, the Discord product-screenshot equivalent.
+import Prop from './Prop.astro';
+
+interface Props {
+  stamp: string;
+  items: { icon: any; label: string; done: boolean }[];
+}
+const { stamp, items } = Astro.props;
+---
+<div class="life-card" aria-hidden="true">
+  <div class="lc-head">
+    <img src="/assets/dove/guide.webp" alt="" width="40" height="36" loading="lazy" />
+    <div>
+      <strong>Heavenly Angels</strong>
+      <span>{stamp}</span>
+    </div>
+    <span class="lc-live"><i></i>Staff on site</span>
+  </div>
+  <ul>
+    {items.map((it) => (
+      <li class={it.done ? 'done' : ''}>
+        <Prop name={it.icon} size={34} />
+        <span>{it.label}</span>
+        <b class="lc-check">
+          <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </b>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .life-card {
+    background: #fff;
+    border-radius: 22px;
+    padding: 18px;
+    color: var(--ink);
+    box-shadow: 0 24px 60px -20px rgba(21, 24, 66, 0.45);
+    transform: rotate(var(--tilt, -2deg));
+    transition: transform 0.5s var(--ease-spring);
+  }
+  .lc-head { display: flex; align-items: center; gap: 10px; padding-bottom: 14px; border-bottom: 1px solid #ecebf5; }
+  .lc-head img { width: 40px; height: auto; background: #eef3ff; border-radius: 50%; padding: 4px; }
+  .lc-head strong { display: block; font-size: 0.98rem; line-height: 1.2; }
+  .lc-head span { font-size: 0.85rem; color: var(--ink-soft); }
+  .lc-live {
+    margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.78rem !important; font-weight: 700; color: #1f7a4a !important;
+    background: #e3f8ec; padding: 6px 10px; border-radius: 999px; white-space: nowrap;
+  }
+  .lc-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--online); }
+  ul { list-style: none; margin: 0; padding: 8px 0 0; }
+  li {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 8px; border-radius: 14px; font-weight: 600; font-size: 1rem; line-height: 1.3;
+  }
+  li + li { margin-top: 2px; }
+  li :global(.prop) { flex: none; }
+  .lc-check {
+    margin-left: auto; flex: none; width: 26px; height: 26px; border-radius: 50%;
+    display: grid; place-items: center; border: 2px solid #d9d8e8; color: transparent;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s, transform 0.4s var(--ease-spring);
+  }
+  .lc-check svg { width: 16px; }
+  :global(.in) li.done .lc-check { background: var(--online); border-color: var(--online); color: #fff; transform: scale(1); }
+  li.done .lc-check { transform: scale(0.6); }
+  :global(.in) li.done:nth-child(1) .lc-check { transition-delay: 0.5s; }
+  :global(.in) li.done:nth-child(2) .lc-check { transition-delay: 0.8s; }
+  :global(.in) li.done:nth-child(3) .lc-check { transition-delay: 1.1s; }
+  .lc-head span { white-space: nowrap; }
+  @media (max-width: 480px) {
+    .life-card { padding: 14px; }
+    .lc-live { display: none !important; }
+    li { padding: 9px 4px; font-size: 0.95rem; }
+  }
+</style>

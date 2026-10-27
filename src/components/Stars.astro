@@ -1,0 +1,32 @@
+---
+// Deterministic star field so builds don't shift between deploys.
+interface Props { count: number; seed: number }
+const { count, seed } = Astro.props;
+let s = seed;
+const rand = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+const stars = Array.from({ length: count }, () => ({
+  x: rand() * 100,
+  y: rand() * 100,
+  size: 1 + rand() * 2.4,
+  delay: rand() * 4,
+  dur: 2.5 + rand() * 3,
+}));
+---
+<div class="stars" aria-hidden="true">
+  {stars.map((st) => (
+    <span
+      style={`left:${st.x.toFixed(2)}%;top:${st.y.toFixed(2)}%;width:${st.size.toFixed(1)}px;height:${st.size.toFixed(1)}px;animation-delay:${st.delay.toFixed(2)}s;animation-duration:${st.dur.toFixed(2)}s`}
+    ></span>
+  ))}
+</div>
+
+<style>
+  .stars { position: absolute; inset: 0; pointer-events: none; }
+  span {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    animation: twinkle 3s ease-in-out infinite;
+  }
+</style>
