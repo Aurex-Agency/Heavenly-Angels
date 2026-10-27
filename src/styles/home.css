@@ -250,7 +250,7 @@
 /* Floating clock that follows the day */
 .day-clock-wrap { position: sticky; top: 0; height: 0; z-index: 5; }
 .day-clock {
-  position: absolute; top: 104px; left: 50%; z-index: 2;
+  position: absolute; top: calc(var(--header-h) + var(--safe-top) + 14px); left: 50%; z-index: 2;
   display: inline-flex; align-items: center; gap: 10px;
   padding: 6px 16px 6px 6px; border-radius: 999px;
   background: rgba(13, 15, 46, 0.55); color: #fff;
@@ -465,7 +465,7 @@ details[open] .faq-plus::before, details[open] .faq-plus::after { background: va
   a, button, summary { -webkit-tap-highlight-color: transparent; }
   .section-head { margin-bottom: 32px; }
 
-  .hero { min-height: 0; padding-top: 96px; }
+  .hero { min-height: 0; padding-top: calc(var(--header-h) + var(--safe-top) + 22px); }
   .hero h1 { font-size: clamp(2.3rem, 11.4vw, 3rem); max-width: none; }
   .hero .lede { font-size: 1.06rem; }
   .hero .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 26px; }
@@ -494,7 +494,7 @@ details[open] .faq-plus::before, details[open] .faq-plus::after { background: va
   .program:active { transform: scale(0.99); }
 
   .day-intro { padding: 18vh 0 2vh; }
-  .day-clock { top: 84px; font-size: 0.875rem; }
+  .day-clock { font-size: 0.875rem; }
   .chapter { padding: 12vh 0; }
   .chapter-panel { border-radius: 28px; }
   .chapter-panel h3 { font-size: 1.85rem; }
