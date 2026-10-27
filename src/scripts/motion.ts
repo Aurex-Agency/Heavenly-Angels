@@ -6,6 +6,10 @@ const header = document.querySelector<HTMLElement>('[data-header]');
 const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
 const siteNav = document.getElementById('site-nav');
 
+const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 40);
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
 const setMenu = (open: boolean) => {
   menuBtn?.setAttribute('aria-expanded', String(open));
   siteNav?.classList.toggle('open', open);
@@ -169,7 +173,6 @@ if (day) {
       ticking = true;
       requestAnimationFrame(update);
     }
-    header?.classList.toggle('scrolled', window.scrollY > 40);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);

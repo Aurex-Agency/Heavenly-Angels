@@ -386,27 +386,6 @@ details[open] .faq-plus { transform: rotate(45deg); background: var(--gold); }
 details[open] .faq-plus::before, details[open] .faq-plus::after { background: var(--ink); }
 .faq-list details p { padding-bottom: 24px; max-width: 60ch; }
 
-/* ---------- Closing ---------- */
-.closing {
-  position: relative; overflow: hidden; isolation: isolate;
-  padding: 200px 0 220px; text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, var(--dusk) 0%, var(--twilight) 50%, var(--twilight-deep) 100%);
-}
-.closing-sky { position: absolute; inset: 0; z-index: -1; }
-.closing-inner { display: flex; flex-direction: column; align-items: center; }
-.closing h2 { font-size: clamp(2.4rem, 6.4vw, 5.4rem); max-width: 13ch; }
-.closing .lede { color: var(--mist); max-width: 38ch; }
-.closing .actions { justify-content: center; }
-.closing-dove { width: 230px; height: auto; margin-bottom: 20px; animation: dove-float 6s ease-in-out infinite; filter: drop-shadow(0 26px 30px rgba(0, 0, 0, 0.4)); }
-@keyframes dove-float {
-  0%, 100% { transform: translateY(0) rotate(-3deg); }
-  50% { transform: translateY(-18px) rotate(3deg); }
-}
-.closing-moon { position: absolute; top: 80px; right: 9%; width: 120px; z-index: -1; --dur: 9s; }
-.closing-cloud { position: absolute; z-index: -1; opacity: 0.18; }
-.closing-cloud-1 { width: 340px; bottom: -40px; left: -60px; }
-.closing-cloud-2 { width: 260px; bottom: 30px; right: -40px; }
-
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; }
@@ -446,8 +425,6 @@ details[open] .faq-plus::before, details[open] .faq-plus::after { background: va
   .service-grid::-webkit-scrollbar { display: none; }
   .service { flex: 0 0 74%; scroll-snap-align: center; }
   .chat { padding: 18px; }
-  .closing { padding: 140px 0 180px; }
-  .closing-moon { width: 80px; top: 40px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -523,12 +500,6 @@ details[open] .faq-plus::before, details[open] .faq-plus::after { background: va
   .about-badge { width: 170px; margin-top: 20px; }
   .start, .faq { padding-bottom: 90px; }
   .faq-list summary { font-size: 1.06rem; padding: 20px 0; }
-  .closing h2 { font-size: clamp(2.2rem, 10.5vw, 3rem); }
-  .closing .actions { display: grid; width: 100%; }
-  .closing .actions .btn { width: 100%; }
-  .closing-cloud { opacity: 0.12; }
-  .closing-cloud-1 { width: 220px; bottom: -30px; left: -50px; }
-  .closing-cloud-2 { width: 170px; bottom: 10px; right: -40px; }
   .hero { padding-bottom: 80px; }
 }
 @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }

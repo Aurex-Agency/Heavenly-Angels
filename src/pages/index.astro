@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import Prop from '../components/Prop.astro';
 import Stars from '../components/Stars.astro';
 import LifeCard from '../components/LifeCard.astro';
+import VisitForm from '../components/VisitForm.astro';
+import FindUs from '../components/FindUs.astro';
 import { business, services, faqs } from '../data/site';
 import '../styles/home.css';
 
@@ -440,22 +442,11 @@ const chapters = [
     </div>
   </section>
 
-  <!-- CLOSING -->
-  <section class="closing" id="visit">
-    <div class="closing-sky" aria-hidden="true"><Stars count={50} seed={99} /></div>
-    <div class="wrap closing-inner">
-      <img class="closing-dove" src="/assets/dove/flight.webp" width="1374" height="1145" alt="" loading="lazy" />
-      <h2>You’ve reached the top of the sky.</h2>
-      <p class="lede">Let’s talk. Call us, or come by and see the home for yourself.</p>
-      <div class="actions">
-        <a class="btn btn-gold" href={business.phoneHref}>Call {business.phone}</a>
-        <a class="btn btn-ghost" href={business.locations[0].maps} target="_blank" rel="noopener">Get directions</a>
-      </div>
-    </div>
-    <Prop name="moon" class="closing-moon bob" />
-    <Prop name="cloud" class="closing-cloud closing-cloud-1" />
-    <Prop name="cloud" class="closing-cloud closing-cloud-2" />
-  </section>
+  <!-- VISIT FORM -->
+  <VisitForm />
+
+  <!-- MAP + BUSINESS INFO -->
+  <FindUs />
 </Base>
 
 <script>
